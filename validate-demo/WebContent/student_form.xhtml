@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      
+      <h:head>
+      <title> Form of the User</title>
+      <style>
+      		.error {color:red;
+      		font-style: oblique;}
+      </style>
+      </h:head>
+      <h:body>
+      	<h:form>
+      		<!-- this label handler all the required files of the form -->
+      		<!--   <h:messages styleClass="error"/> -->
+      		<br/>
+      		First Name <h:inputText id="first_name" label="FistName" value="#{student.firstName}" required="true"></h:inputText>
+      		<h:message for="first_name" styleClass="error" ></h:message>
+      		<br/>
+      		<br/>
+      		Last Name <h:inputText id="last_name" label="lastName" value="#{student.lastName}" required="true"></h:inputText>
+      		<h:message for="last_name" styleClass="error" ></h:message>
+      		
+      		<br/>
+      		<br/>
+      		Email <h:inputText id="email" label="email" value="#{student.email}" required="true" requiredMessage="Your email is mandatory"></h:inputText>
+      		<!-- the  requiredMessage change the default message 
+      		and the  id and for are connected to handler the error -->
+    		<h:message for="email" styleClass="error" ></h:message>
+      		
+    		<br/>
+      		<br/>
+      		Free Pases <h:inputText id="pases" label="free pases" value="#{student.passes}" required="true" requiredMessage="This field is mandatory">
+      					<f:validateLongRange minimum="0" maximum="10"></f:validateLongRange>
+      					</h:inputText>
+      		<h:message for="pases" styleClass="error" ></h:message>
+      		<br/>
+      		<br/>
+      		PostalCode <h:inputText id="codep" label="postal code" value="#{student.postalCode}" validatorMessage="this field change the message of the validation field">
+      					<f:validateLength minimum="5" maximum="5"></f:validateLength>
+      					</h:inputText>
+      		<h:message for="codep" styleClass="error" ></h:message>
+      		<br/>
+      		<br/>
+      		NIE <h:inputText id="nie" label="nie-number" value="#{student.DNI}">
+      		
+      			<f:validateRegex  pattern="[A-Z]{1}-\d{2}-\d{2}-\d{3}-[A-Z]{1}"></f:validateRegex>
+      		</h:inputText>
+      		<h:message for="nie" styleClass="error"></h:message>
+      		<br/>
+      		<br/>
+      		<!-- Custom handler error validation -->
+      		
+      		CodeCourse <h:inputText id="codeCourse" label="code Course" value="#{student.courseCode}" validator="#{student.validateTheCourseCode}">
+      		</h:inputText>
+      		<h:message for="codeCourse" styleClass="error"></h:message>
+      		<br/>
+      		<br/>
+      		<h:commandButton value="Submit" action="process_data"></h:commandButton>
+      	</h:form>
+      </h:body>
+
+</html>
